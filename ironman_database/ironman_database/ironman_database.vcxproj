@@ -153,6 +153,13 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\..\..\..\Benn%27s Inspiron 7586\source\repos\GitHub\22c_project\ironman_database\ironman_database\ironman_database\main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\..\..\..\Benn%27s Inspiron 7586\source\repos\GitHub\22c_project\ironman_database\ironman_database\ironman_database\Armors.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\..\Benn%27s Inspiron 7586\source\repos\GitHub\22c_project\ironman_database\ironman_database\ironman_database\BinaryNode.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\..\Benn%27s Inspiron 7586\source\repos\GitHub\22c_project\ironman_database\ironman_database\ironman_database\BinarySearchTree.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\..\Benn%27s Inspiron 7586\source\repos\GitHub\22c_project\ironman_database\ironman_database\ironman_database\BinaryTree.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\..\Benn%27s Inspiron 7586\source\repos\GitHub\22c_project\ironman_database\ironman_database\ironman_database\Hash.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

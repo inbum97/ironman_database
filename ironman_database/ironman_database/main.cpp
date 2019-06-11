@@ -1,20 +1,67 @@
-// ironman_database.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// 22C_Project.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include <iostream>
+#include <fstream>
+
+using namespace std;
+
+// functions prototype
+void menu();
+void fileInput(string filename);
+
 
 int main()
 {
-	std::cout << "Hello World!\n";
+	const char inputFileName[] = "armors.txt";
+
+	cout << "Hello World!\n";
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+void fileInput(string filename)
+{
+	ifstream infile(filename);
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+	string codename, type, creator, movie, curstat, precede, succeed;
+	int year;
+
+	if (!infile) {
+		cout << "Error happened to open the input file!" << endl;
+		exit(EXIT_FAILURE);
+	}
+
+	/*
+
+	while (infile >> keyid)
+	{
+		infile.ignore();
+		getline(infile, toyname, ';');
+
+		infile >> toyage >> toyprice;
+		//Use constructor to pass the values to the toy object.
+		Toy toy(keyid, toyname, toyage, toyprice);
+		bst.insert(toy);
+	}
+	infile.close();
+	*/
+}
+
+void menu()
+{
+	cout << "MENU" << endl;
+	cout << "=================================================================" << endl;
+	// L : Show list of armors (will prompt sub-menu)
+	// (L submenu) - U : Show list of armors (unsorted)
+	// (L submenu) - P : Show list of armors (sorted by codename)
+	// (L submenu) - S : Show list of armors (sorted by armor type)
+	// (L submenu) - T : Show indented list
+
+	// Search : Search for armors
+	// (S submenu) - P : Search by codename
+	// (S submenu) - P : Search by armor type
+
+	// A : Add new armor (will prompt all the necessary data input)
+	// D : Delete armor (codename)
+}
+
+
