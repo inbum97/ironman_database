@@ -62,10 +62,37 @@ public:
 
 
 	// Getters
-
+	string getCodename() const { return codename; }
 
 	// Other functions
 	void display();		// display the information of the searched iron man suit.
+
+	friend bool operator<(const Armors& a1, const Armors& a2) { return a1.codename < a2.codename; }
+	friend bool operator>(const Armors& a1, const Armors& a2) { return a1.codename > a2.codename; }
+	friend bool operator==(const Armors& a1, const Armors& a2) { return a1.codename == a2.codename; }
+	friend ostream& operator <<(ostream& out, const Armors& armor) {
+		out << armor.codename << ":" << armor.armorType << "\nMade by: " << armor.creator << " in " << armor.yearMade 
+			<< "\nUsers: " << armor.users << ", appeared in: " << armor.movieAppeared << "\nCurrent Status: " << armor.currStats
+			<< "\nArmor Capabilities: " << armor.capabilities << "\nWeapons: " << armor.weapons
+			<< "\nPrecede: " << armor.precede << "\tSucceed: " << armor.succeed ;
+		return out;
+	}
+	friend istream& operator >>(istream& in, Armors& armor) {
+		getline(in, armor.codename, ';');
+		getline(in, armor.armorType, ';');
+		getline(in, armor.creator, ';');
+		in >> armor.yearMade;
+		in.ignore();
+		getline(in, armor.users, ';');
+		getline(in, armor.movieAppeared, ';');
+		getline(in, armor.currStats, ';');
+		getline(in, armor.capabilities, ';');
+		getline(in, armor.weapons, ';');
+		getline(in, armor.precede, ';');
+		getline(in, armor.succeed, ';');
+		return in;
+
+	}
 
 };
 

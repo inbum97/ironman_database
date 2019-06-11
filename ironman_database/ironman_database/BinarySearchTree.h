@@ -4,6 +4,8 @@
 #define _BINARY_SEARCH_TREE
 
 #include "BinaryTree.h"
+#include "Armors.h"
+
 
 template<class ItemType>
 class BinarySearchTree : public BinaryTree<ItemType>

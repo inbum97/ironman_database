@@ -6,23 +6,30 @@
 #include <string>
 #include <vector>
 
-#include "Armors.h"
+#include "BinarySearchTree.h"
 
 using namespace std;
 
+// Type of BST
+typedef BinarySearchTree<Armors> TreeType;
+
 // functions prototype
 void menu();
-void fileInput(string filename);
+void fileInput(string filename, TreeType &bst);
+void screenOutput();
 
 
 int main()
 {
 	const char inputFileName[] = "armors.txt";
-	fileInput(inputFileName);
+
+	TreeType bst;
+	fileInput(inputFileName, bst);
+	
 
 }
 
-void fileInput(string filename)
+void fileInput(string filename, TreeType &bst)
 {
 	ifstream infile(filename);
 
@@ -34,55 +41,6 @@ void fileInput(string filename)
 		cout << "Error happened to open the input file!" << endl;
 		exit(EXIT_FAILURE);
 	}
-
-	/*
-	int i = 0;
-	while (getline(infile, codename, ';'))
-	{
-		cout << codename << endl;
-	}
-	*/
-
-	/*
-	// read the amor user into armor vector
-	getline(infile, item, ',');
-	users.push_back(item);
-	getline(infile, item, ';');
-	users.push_back(item);
-
-	// CAPBILITIES
-	// (1) read from the file until the ';' as one whole string,
-	// (2) and the split them into pieces of string and then push them into its vector
-	getline(infile, item, ';'); // (1)
-	size_t comma = item.find_first_of(','); // first comma
-	size_t nextComma = item.find_first_of(',', comma + 1); // next comma
-	item2 = item.substr(0, comma); // this line onwards is (2)
-	capbl.push_back(item2);
-	while (comma != string::npos)
-	{
-		item2 = item.substr(comma + 1, nextComma - comma - 1);
-		capbl.push_back(item2);
-		comma = nextComma;
-		nextComma = item.find_first_of(',', nextComma + 1);
-	}
-
-	// WEAPONS
-	// (1) read from the file until the ';' as one whole string,
-	// (2) and the split them into pieces of string and then push them into its vector
-	getline(infile, item, ';'); // (1)
-	comma = item.find_first_of(','); // first comma
-	nextComma = item.find_first_of(',', comma + 1); // next comma
-	item2 = item.substr(0, comma); // this line onwards is (2)
-	weap.push_back(item2);
-	while (comma != string::npos)
-	{
-		item2 = item.substr(comma + 1, nextComma - comma - 1);
-		weap.push_back(item2);
-		comma = nextComma;
-		nextComma = item.find_first_of(',', nextComma + 1);
-	}
-	*/
-
 	
 	// READING THE FILE AND DECLARE TO RESPECTICE VARIABLE 
 	//======================================================
@@ -100,6 +58,8 @@ void fileInput(string filename)
 		getline(infile, precede, ';');
 		getline(infile, succeed, ';');
 
+		Armors armors(codename, type, creator, year, users, movie, curstat, capbl, weap, precede, succeed);
+		bst.insert(armors);
 
 		// TEST IF FILE IS READ PROPERLY
 		cout << "======================================================" << endl;
@@ -116,23 +76,8 @@ void fileInput(string filename)
 		cout << "succeed: " << succeed << endl;
 		cout << "======================================================" << endl << endl;
 	}
-	
-	
-
-	/*
-
-	while (infile >> keyid)
-	{
-		infile.ignore();
-		getline(infile, toyname, ';');
-
-		infile >> toyage >> toyprice;
-		//Use constructor to pass the values to the toy object.
-		Toy toy(keyid, toyname, toyage, toyprice);
-		bst.insert(toy);
-	}
 	infile.close();
-	*/
+	
 }
 
 void menu()
@@ -153,4 +98,45 @@ void menu()
 	// D : Delete armor (codename)
 }
 
+void screenOutput()
+{
+	// DOESNT WORK ON FILE INPUT, CAN BE USED FOR SCREEN OUTPUT
+	/*
+	// read the amor user into armor vector
+	getline(infile, item, ',');
+	users.push_back(item);
+	getline(infile, item, ';');
+	users.push_back(item);
+	// CAPBILITIES
+	// (1) read from the file until the ';' as one whole string,
+	// (2) and the split them into pieces of string and then push them into its vector
+	getline(infile, item, ';'); // (1)
+	size_t comma = item.find_first_of(','); // first comma
+	size_t nextComma = item.find_first_of(',', comma + 1); // next comma
+	item2 = item.substr(0, comma); // this line onwards is (2)
+	capbl.push_back(item2);
+	while (comma != string::npos)
+	{
+		item2 = item.substr(comma + 1, nextComma - comma - 1);
+		capbl.push_back(item2);
+		comma = nextComma;
+		nextComma = item.find_first_of(',', nextComma + 1);
+	}
+	// WEAPONS
+	// (1) read from the file until the ';' as one whole string,
+	// (2) and the split them into pieces of string and then push them into its vector
+	getline(infile, item, ';'); // (1)
+	comma = item.find_first_of(','); // first comma
+	nextComma = item.find_first_of(',', comma + 1); // next comma
+	item2 = item.substr(0, comma); // this line onwards is (2)
+	weap.push_back(item2);
+	while (comma != string::npos)
+	{
+		item2 = item.substr(comma + 1, nextComma - comma - 1);
+		weap.push_back(item2);
+		comma = nextComma;
+		nextComma = item.find_first_of(',', nextComma + 1);
+	}
+	*/
+}
 

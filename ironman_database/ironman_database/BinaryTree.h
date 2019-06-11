@@ -4,7 +4,7 @@
 #define _BINARY_TREE
 
 #include "BinaryNode.h"
-//#include "Queue.h"
+#include "Queue.h"
 
 template<class ItemType>
 class BinaryTree
@@ -62,16 +62,16 @@ private:
 template<class ItemType>
 void BinaryTree<ItemType>::destroyTree(BinaryNode<ItemType>* nodePtr)
 {
-	if (root != NULL)
+	if (nodePtr != NULL)
 	{
-		destroyTree(rootPtr->getLeftPtr);
-		destroyTree(rootPtr->getRightPtr);
-		delete(rootPtr);
-		if (rootPtr->getLeftPtr != NULL)
-			rootPtr->getLeftPtr = NULL;
-		if (rootPtr->getRightPtr != NULL)
-			rootPtr->getRightPtr = NULL;
-		rootPtr = NULL;
+		destroyTree(nodePtr->getLeftPtr());
+		destroyTree(nodePtr->getRightPtr());
+		delete(nodePtr);
+		if (nodePtr->getLeftPtr() != NULL)
+			nodePtr->getLeftPtr() = NULL;
+		if (nodePtr->getRightPtr() != NULL)
+			nodePtr->getRightPtr() = NULL;
+		nodePtr = NULL;
 	}
 
 }
@@ -121,29 +121,29 @@ template<class ItemType>
 void BinaryTree<ItemType>::_levelorder(void visit(ItemType&), BinaryNode<ItemType> * nodePtr) const
 {
 	if (nodePtr != 0)
-	{
-		Queue<BinaryNode<ItemType>*> q;
-		q.enqueue(nodePtr);
-		BinaryNode<ItemType>* ptr;
+    {
+        Queue<BinaryNode<ItemType>*> q;
+        q.enqueue(nodePtr);
+        BinaryNode<ItemType> *ptr;
 
-		while (!q.isEmpty())
-		{
-			q.dequeue(ptr);
+        while (!q.isEmpty())
+        {
+            q.dequeue(ptr);
 
-			ItemType item = ptr->getItem();
-			visit(item);
+            ItemType item = ptr->getItem();
+            visit(item);
 
-			if (ptr->getLeftPtr())
-			{
-				q.enqueue(ptr->getLeftPtr());
-			}
-			if (ptr->getRightPtr())
-			{
-				q.enqueue(ptr->getRightPtr());
-			}
-		}
+            if (ptr->getLeftPtr())
+            {
+                q.enqueue(ptr->getLeftPtr());
+            }
+            if (ptr->getRightPtr())
+            {
+                q.enqueue(ptr->getRightPtr());
+            }
+        }
 
-	}
+    }
 }
 
 // Print helper, using pre-order traversal
