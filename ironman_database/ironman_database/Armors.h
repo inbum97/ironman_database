@@ -56,7 +56,7 @@ public:
 																	succeed(succeedModel) {};
 
 	// Destructor
-	//~Armor();
+	// ~Armor();
 
 	// Setters
 
@@ -65,8 +65,8 @@ public:
 	string getCodename() const { return codename; }
 
 	// Other functions
-	void display();		// display the information of the searched iron man suit.
 
+	// Operator functions
 	friend bool operator<(const Armors& a1, const Armors& a2) { return a1.codename < a2.codename; }
 	friend bool operator>(const Armors& a1, const Armors& a2) { return a1.codename > a2.codename; }
 	friend bool operator==(const Armors& a1, const Armors& a2) { return a1.codename == a2.codename; }
@@ -91,7 +91,6 @@ public:
 		getline(in, armor.precede, ';');
 		getline(in, armor.succeed, ';');
 		return in;
-
 	}
 
 };

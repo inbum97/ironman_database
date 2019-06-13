@@ -25,6 +25,7 @@ int main()
 
 	TreeType bst;
 	fileInput(inputFileName, bst);
+
 	
 
 }
@@ -34,7 +35,6 @@ void fileInput(string filename, TreeType &bst)
 	ifstream infile(filename);
 
 	string codename, type, creator, movie, curstat, precede, succeed, users, capbl, weap;
-	string item="", item2="";
 	int year = 0;
 
 	if (!infile) {

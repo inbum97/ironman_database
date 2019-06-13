@@ -4,6 +4,7 @@
 #define _BINARY_SEARCH_TREE
 
 #include "BinaryTree.h"
+#include "Hash.h"
 #include "Armors.h"
 
 
