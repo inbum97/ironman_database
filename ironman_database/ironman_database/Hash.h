@@ -1,8 +1,9 @@
 #ifndef Hash_H
 #define Hash_H
+
 #include <iostream>
 #include "List.h"
-//#include <list>
+
 using namespace std;
 
 class Hash {

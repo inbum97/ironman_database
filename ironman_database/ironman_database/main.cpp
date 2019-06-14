@@ -15,8 +15,14 @@ typedef BinarySearchTree<Armors> TreeType;
 
 // functions prototype
 void menu();
+void searchSubmenu();
+void listSubmenu();
+void processChoice();
+
 void fileInput(string filename, TreeType &bst);
+int userChoice();
 void screenOutput();
+
 
 
 int main()
@@ -26,7 +32,19 @@ int main()
 	TreeType bst;
 	fileInput(inputFileName, bst);
 
-	
+	// FOR HASH
+	/*
+	Armors *A= new armor;
+	Hash H(1);
+	H.insertItem(A);
+	string del = "Sneaky";
+	H.deleteItem(del);
+	H.searchByP("Sneaky");
+	H.stat();
+	*/
+
+	menu();
+	processChoice();
 
 }
 
@@ -62,6 +80,7 @@ void fileInput(string filename, TreeType &bst)
 		bst.insert(armors);
 
 		// TEST IF FILE IS READ PROPERLY
+		/*
 		cout << "======================================================" << endl;
 		cout << "codename: " << codename << endl;
 		cout << "type: " << type << endl;
@@ -75,6 +94,7 @@ void fileInput(string filename, TreeType &bst)
 		cout << "precede: " << precede << endl;
 		cout << "succeed: " << succeed << endl;
 		cout << "======================================================" << endl << endl;
+		*/
 	}
 	infile.close();
 	
@@ -82,8 +102,6 @@ void fileInput(string filename, TreeType &bst)
 
 void menu()
 {
-	cout << "MENU" << endl;
-	cout << "=================================================================" << endl;
 	// L : Show list of armors (will prompt sub-menu)
 	// (L submenu) - U : Show list of armors (unsorted)
 	// (L submenu) - P : Show list of armors (sorted by codename)
@@ -96,6 +114,216 @@ void menu()
 
 	// A : Add new armor (will prompt all the necessary data input)
 	// D : Delete armor (codename)
+
+	cout << "MENU: " << endl;
+	cout << "======================================================" << endl;
+	cout << "1 : Add menu data" << endl;
+	cout << "2 : Delete data" << endl;
+	cout << "3 : Search" << endl;
+	cout << "4 : Show list" << endl;
+	cout << "0 : Quit" << endl;
+	cout << "------------------------------------------------------" << endl;
+	cout << "User choice: ";
+}
+
+/***********************************************************
+userChoice():
+getting the choice from user and return the value as int
+
+	Let the return value be:
+	1 : (A) ADD
+	2 : (D) DLETE
+	3 : (S\P) SEARCH by PRIMARY Key
+	4 : (S\S) SEARCH by SECONDARY Key
+	5 : (L\U) LIST - Unsorted
+	6 : (L\P) LIST - Sorted by PRIMARY Key
+	7 : (L\S) LIST - Sorted by SECONDARY Key
+	8 : (L\T) LIST - as a TREE
+	9 : (L\0) LIST - Print LEVEL-ORDER
+	10 : (L\1) LIST - Print PRE-ORDER
+	11 : (L\2) LIST - Print IN-ORDER
+	12 : (L\3) LIST - Print POST-ORDER
+***********************************************************/
+/*
+int userChoice()
+{
+	char choice;
+	char menu[9] = { 'A','D','S','L'};
+	char searchSubmenu [2] = {'P', 'S'};
+	char listSubmenu [8] = {'U','P', 'S', 'T', '0', '1','2','3'};
+
+	do {
+		cout << endl << "User Choice: ";
+		cin >> choice;
+		choice = toupper(choice);
+
+		for (int i = 0; i < 4; i++) {
+			if (choice == menu[i]) {
+				if (menu[i] == 'A') { return 1; }
+				else if (menu[i] == 'D') { return 2; }
+				else if (menu[i] == 'S')
+				{
+					cout << "Search by:" << endl;
+					cout << "------------" << endl;
+					cout << "P : Primary Key " << endl;
+					cout << "S : Secondary Key " << endl;
+					cin >> choice;
+					choice = toupper(choice);
+					
+					if (choice == 'P') { return 3; }
+					else if (choice == 'S') { return 4; }
+				}
+				else if (menu[i] == 'L')
+				{
+					cout << "List as:" << endl;
+					cout << "------------" << endl;
+					cout << "U : Unsorted " << endl;
+					cout << "P : Primary Key " << endl;
+					cout << "S : Secondary Key " << endl;
+					cout << "T : Tree " << endl;
+					cout << "0 : Level-order " << endl;
+					cout << "1 : Pre-order " << endl;
+					cout << "2 : In-order " << endl;
+					cout << "3 : Post-order " << endl;
+					cin >> choice;
+					choice = toupper(choice);
+
+					if (choice == 'U') { return 5; }
+					else if (choice == 'P') { return 6; }
+					else if (choice == 'S') { return 7; }
+					else if (choice == 'T') { return 8; }
+					else if (choice == '0') { return 9; }
+					else if (choice == '1') { return 10; }
+					else if (choice == '2') { return 11; }
+					else if (choice == '3') { return 12; }
+				}
+			}
+			else if (i == 3) {
+				cout << "Invalid Input: Please try again." << endl;
+			}
+		}
+
+	} while (choice);
+
+	return choice;
+
+}
+*/
+
+void searchSubmenu()
+{
+	int y = -1;
+	cout << "Search by:" << endl;
+	cout << "------------" << endl;
+	cout << "1 : Primary Key " << endl;
+	cout << "2 : Secondary Key " << endl;
+	cout << "3 : Back to menu " << endl;
+	cout << "User choice: ";
+	cin >> y;
+	cout << endl;
+
+	switch (y)
+	{
+	case 1: // search by primary key function
+		break;
+	case 2: // search by secondary key function
+		break;
+	case 0: menu();
+		processChoice();
+		break;
+	default: cout << "Input invalid." << endl;
+		searchSubmenu();
+	}
+
+}
+
+void listSubmenu()
+{
+	int y = -1;
+	cout << "List as:" << endl;
+	cout << "------------" << endl;
+	cout << "1 : Unsorted " << endl;
+	cout << "2 : Primary Key " << endl;
+	cout << "3 : Secondary Key " << endl;
+	cout << "4 : Tree " << endl;
+	cout << "5 : Level-order " << endl;
+	cout << "6 : Pre-order " << endl;
+	cout << "7 : In-order " << endl;
+	cout << "8 : Post-order " << endl;
+	cout << "0 : Back to menu " << endl;
+	cout << "User choice: ";
+	cin >> y;
+	cout << endl;
+
+	switch (y)
+	{
+	case 1: // unsorted list
+		break;
+	case 2: // lsit sorted by primary key
+		break;
+	case 3: // list sorted by secondary key
+		break;
+	case 4: // list printed as tree
+		break;
+	case 5: // list printed as level-order
+		break;
+	case 6: // list printed as pre-order
+		break;
+	case 7: // list printed as in-order
+		break;
+	case 8: // list printed as post-order
+		break;
+	case 0: menu();
+		processChoice();
+		break;
+	default: cout << "Input invalid." << endl;
+		listSubmenu();
+	}
+
+}
+
+/***********************************************************
+void processChoice(char choice, TreeType& bst):
+getting the choice from user and return the value as int
+
+	cases:
+	x	y
+	1 : (A) ADD
+	2 : (D) DLETE
+	3 : (S) SEARCH:
+		1 : (P) SEARCH by PRIMARY Key
+		2 : (S) SEARCH by SECONDARY Key
+	4 : (L) LIST:
+		1 : (U) LIST - Unsorted
+		2 : (P) LIST - Sorted by PRIMARY Key
+		3 : (S) LIST - Sorted by SECONDARY Key
+		4 : (T) LIST - as a TREE
+		5 : (0) LIST - Print LEVEL-ORDER
+		6 : (1) LIST - Print PRE-ORDER
+		7 : (2) LIST - Print IN-ORDER
+		8 : (3) LIST - Print POST-ORDER
+***********************************************************/
+void processChoice()
+{
+	int x = 0;
+	cin >> x;
+	cout << endl;
+
+	switch (x)
+	{
+	case 1: // add function
+		break;
+	case 2: // delete function
+		break;
+	case 3:
+		searchSubmenu();
+	case 4:
+		listSubmenu();
+	case 0: cout << "Program ended" << endl;
+		exit(EXIT_FAILURE);
+	default: cout << "Input invalid." << endl;
+		processChoice();
+	}
 }
 
 void screenOutput()
