@@ -18,10 +18,23 @@ void menu();
 void searchSubmenu();
 void listSubmenu();
 void processChoice();
+string inputKey();
+
+void preOrderTraversal(TreeType& bst);
+void inOrderTraversal(TreeType& bst);
+void postOrderTraversal(TreeType& bst);
+void breadthTraversal(TreeType& bst);
+
 
 void fileInput(string filename, TreeType &bst);
-int userChoice();
+
+
 void screenOutput();
+
+void display(Armors& item)
+{
+	cout << item << endl;
+}
 
 
 
@@ -32,19 +45,18 @@ int main()
 	TreeType bst;
 	fileInput(inputFileName, bst);
 
-	// FOR HASH
-	/*
-	Armors *A= new armor;
+	menu();
+	processChoice();
+
+	
+	Armors *A= new Armors;
 	Hash H(1);
 	H.insertItem(A);
 	string del = "Sneaky";
 	H.deleteItem(del);
 	H.searchByP("Sneaky");
 	H.stat();
-	*/
-
-	menu();
-	processChoice();
+	
 
 }
 
@@ -102,18 +114,23 @@ void fileInput(string filename, TreeType &bst)
 
 void menu()
 {
-	// L : Show list of armors (will prompt sub-menu)
-	// (L submenu) - U : Show list of armors (unsorted)
-	// (L submenu) - P : Show list of armors (sorted by codename)
-	// (L submenu) - S : Show list of armors (sorted by armor type)
-	// (L submenu) - T : Show indented list
-
-	// Search : Search for armors
-	// (S submenu) - P : Search by codename
-	// (S submenu) - P : Search by armor type
-
-	// A : Add new armor (will prompt all the necessary data input)
-	// D : Delete armor (codename)
+	/*
+	1 : (A)ADD
+	2 : (D)DLETE
+	3 : (S)SEARCH :
+		1 : (P)SEARCH by PRIMARY Key
+		2 : (S)SEARCH by SECONDARY Key
+	4 : (L)LIST :
+		1 : (U)LIST - Unsorted
+		2 : (P)LIST - Sorted by PRIMARY Key
+		3 : (S)LIST - Sorted by SECONDARY Key
+		4 : (T)LIST - as a TREE
+		5 : (0) LIST - Print LEVEL-ORDER
+		6 : (1) LIST - Print PRE-ORDER
+		7 : (2) LIST - Print IN-ORDER
+		8 : (3) LIST - Print POST-ORDER
+	0 : Quit / Back to main menu
+	*/
 
 	cout << "MENU: " << endl;
 	cout << "======================================================" << endl;
@@ -123,7 +140,6 @@ void menu()
 	cout << "4 : Show list" << endl;
 	cout << "0 : Quit" << endl;
 	cout << "------------------------------------------------------" << endl;
-	cout << "User choice: ";
 }
 
 /***********************************************************
@@ -217,7 +233,7 @@ void searchSubmenu()
 	cout << "------------" << endl;
 	cout << "1 : Primary Key " << endl;
 	cout << "2 : Secondary Key " << endl;
-	cout << "3 : Back to menu " << endl;
+	cout << "0 : Back to menu " << endl;
 	cout << "User choice: ";
 	cin >> y;
 	cout << endl;
@@ -231,7 +247,10 @@ void searchSubmenu()
 	case 0: menu();
 		processChoice();
 		break;
-	default: cout << "Input invalid." << endl;
+	default: 
+		cout << "----------------" << endl;
+		cout << " INPUT INVALID. " << endl;
+		cout << "----------------" << endl;
 		searchSubmenu();
 	}
 
@@ -276,36 +295,23 @@ void listSubmenu()
 	case 0: menu();
 		processChoice();
 		break;
-	default: cout << "Input invalid." << endl;
+	default: 
+		cout << "----------------" << endl;
+		cout << " INPUT INVALID. " << endl;
+		cout << "----------------" << endl;
 		listSubmenu();
 	}
 
 }
 
-/***********************************************************
+/*****************************************************************
 void processChoice(char choice, TreeType& bst):
-getting the choice from user and return the value as int
-
-	cases:
-	x	y
-	1 : (A) ADD
-	2 : (D) DLETE
-	3 : (S) SEARCH:
-		1 : (P) SEARCH by PRIMARY Key
-		2 : (S) SEARCH by SECONDARY Key
-	4 : (L) LIST:
-		1 : (U) LIST - Unsorted
-		2 : (P) LIST - Sorted by PRIMARY Key
-		3 : (S) LIST - Sorted by SECONDARY Key
-		4 : (T) LIST - as a TREE
-		5 : (0) LIST - Print LEVEL-ORDER
-		6 : (1) LIST - Print PRE-ORDER
-		7 : (2) LIST - Print IN-ORDER
-		8 : (3) LIST - Print POST-ORDER
-***********************************************************/
+processing user's choice and execute the function of the choice
+*****************************************************************/
 void processChoice()
 {
 	int x = 0;
+	cout << "User input: ";
 	cin >> x;
 	cout << endl;
 
@@ -321,9 +327,67 @@ void processChoice()
 		listSubmenu();
 	case 0: cout << "Program ended" << endl;
 		exit(EXIT_FAILURE);
-	default: cout << "Input invalid." << endl;
+	default:
+		cout << "----------------" << endl;
+		cout << " INPUT INVALID. " << endl;
+		cout << "----------------" << endl;
 		processChoice();
 	}
+}
+
+// input function
+string inputKey()
+{
+	string key;
+	cout << endl << "Input a key: ";
+	cin >> key;
+	return key;
+}
+
+void searchBST(TreeType& bst)
+{
+	string key = inputKey();
+	Armors armor(key);
+	if (bst.getEntry(armor, armor))
+	{
+		display(toy);
+	}
+	else
+	{
+		cout << "Not found." << endl;
+	}
+}
+
+void preOrderTraversal(TreeType& bst)
+{
+	cout << "---------------------------------------------" << endl;
+	cout << "Pre-order:" << endl;
+	bst.preOrder(display);
+	cout << "---------------------------------------------" << endl;
+}
+
+void inOrderTraversal(TreeType& bst)
+{
+	cout << "---------------------------------------------" << endl;
+	cout << "In-order:" << endl;
+	bst.inOrder(display);
+	cout << "---------------------------------------------" << endl;
+}
+
+void postOrderTraversal(TreeType& bst)
+{
+	cout << "---------------------------------------------" << endl;
+	cout << "Post-order:" << endl;
+	bst.postOrder(display);
+	cout << "---------------------------------------------" << endl;
+}
+
+void breadthTraversal(TreeType& bst)
+{
+	cout << "---------------------------------------------" << endl;
+	cout << "Level-order:" << endl;
+	bst.levelOrder(display);
+	cout << "---------------------------------------------" << endl;
 }
 
 void screenOutput()
